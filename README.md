@@ -16,6 +16,7 @@ This fork is heavily based upon the work of Nicholas Anastasi on ["Never had a b
 | Stripping X-Gophish-Signature | Replaced `X-Gophish-Signature` with `X-Signature` in `webhook/webhook.go` |
 | Changing server name | Changed the server name from `gophish` to `IGNORE` in `config/config.go` (this will change the value of the X-Mailer header) |
 | Changing rid value | Changed the recipient parameter from `rid` to `userid` in `models/campaign.go` |
+| Added a custom 404 page | Gophish original 404 can be used for detection as proven in [this article](https://insomniasec.com/blog/identifying-gophish-servers). Changes were to made to `controllers/phish.go` to load a custom 404 page at `templates/404.html` |
 
 ### Install
 
