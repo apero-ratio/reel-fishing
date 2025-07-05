@@ -12,10 +12,9 @@ This fork is heavily based upon the work of Nicholas Anastasi on ["Never had a b
 
 | Feature | Description |
 |---------|-------------|
-| Disable X-Mailer header | Commented out the X-Mailer header in `models/maillog.go` |
 | Stripping X-Gophish-Contact | Replaced `X-Gophish-Contact` with `X-Contact` in multiple files: `models/email_request_test.go`, `models/maillog.go`, `models/maillog_test.go`, `models/email_request.go` |
 | Stripping X-Gophish-Signature | Replaced `X-Gophish-Signature` with `X-Signature` in `webhook/webhook.go` |
-| Changing server name | Changed the server name from `gophish` to `IGNORE` in `config/config.go` |
+| Changing server name | Changed the server name from `gophish` to `IGNORE` in `config/config.go` (this will change the value of the X-Mailer header) |
 | Changing rid value | Changed the recipient parameter from `rid` to `userid` in `models/campaign.go` |
 
 ### Install
