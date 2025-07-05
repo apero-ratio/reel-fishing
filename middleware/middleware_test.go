@@ -6,9 +6,9 @@ import (
 	"net/http/httptest"
 	"testing"
 
-	"github.com/gophish/gophish/config"
-	ctx "github.com/gophish/gophish/context"
-	"github.com/gophish/gophish/models"
+	"github.com/apero-ratio/reelfish/config"
+	ctx "github.com/apero-ratio/reelfish/context"
+	"github.com/apero-ratio/reelfish/models"
 )
 
 var successHandler = http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {

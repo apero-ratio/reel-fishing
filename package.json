@@ -3,12 +3,12 @@
   "version": "0.4.0-dev",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gophish/gophish.git"
+    "url": "git+https://github.com/apero-ratio/reelfish.git"
   },
   "author": "Jordan Wright",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/gophish/gophish/issues"
+    "url": "https://github.com/apero-ratio/reelfish/issues"
   },
   "homepage": "https://getgophish.com",
   "devDependencies": {

@@ -42,6 +42,6 @@ Documentation about gophish features can be found on the [Gophish documentation]
 
 ### Contributing
 > [!WARNING]  
-> Features or issues related to Gophish features should be directed upstream towards the [Gophish repository](https://github.com/gophish/gophish/issues).
+> Features or issues related to Gophish features should be directed upstream towards the [Gophish repository](https://github.com/apero-ratio/reelfish/issues).
 
 But if you do find something buggy or have a feature idea, that we can act on, please do feel free to [file an issue](https://github.com/apero-ration/reelfish/issues/new) on this repo.

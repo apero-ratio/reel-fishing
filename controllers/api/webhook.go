@@ -5,9 +5,9 @@ import (
 	"net/http"
 	"strconv"
 
-	log "github.com/gophish/gophish/logger"
-	"github.com/gophish/gophish/models"
-	"github.com/gophish/gophish/webhook"
+	log "github.com/apero-ratio/reelfish/logger"
+	"github.com/apero-ratio/reelfish/models"
+	"github.com/apero-ratio/reelfish/webhook"
 	"github.com/gorilla/mux"
 )
 

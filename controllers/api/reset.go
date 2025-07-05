@@ -3,9 +3,9 @@ package api
 import (
 	"net/http"
 
-	"github.com/gophish/gophish/auth"
-	ctx "github.com/gophish/gophish/context"
-	"github.com/gophish/gophish/models"
+	"github.com/apero-ratio/reelfish/auth"
+	ctx "github.com/apero-ratio/reelfish/context"
+	"github.com/apero-ratio/reelfish/models"
 )
 
 // Reset (/api/reset) resets the currently authenticated user's API key

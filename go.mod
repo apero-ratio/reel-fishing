@@ -1,4 +1,4 @@
-module github.com/gophish/gophish
+module github.com/apero-ratio/reelfish
 
 go 1.13
 
