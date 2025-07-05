@@ -22,7 +22,6 @@ import (
 	"github.com/gorilla/handlers"
 	"github.com/gorilla/mux"
 	"github.com/jordan-wright/unindexed"
-	bm "github.com/microcosm-cc/bluemonday"
 )
 
 // ErrInvalidRequest is thrown when a request with an invalid structure is
