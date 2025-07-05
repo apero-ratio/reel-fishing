@@ -1,4 +1,4 @@
-![gophish logo](https://raw.github.com/apero-ratio/reel-fishing/master/static/images/fishing.png)
+![Reel-fishing banner](https://raw.github.com/apero-ratio/reel-fishing/master/static/images/fishing.avif)
 
 Reel-fishing
 =======
