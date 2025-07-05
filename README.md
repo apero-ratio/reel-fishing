@@ -10,13 +10,13 @@ This fork is heavily based upon the work of Nicholas Anastasi on ["Never had a b
 
 ## Modified features
 
-| Feature | Description |
-|---------|-------------|
-| Stripping X-Gophish-Contact | Replaced `X-Gophish-Contact` with `X-Contact` in multiple files: `models/email_request_test.go`, `models/maillog.go`, `models/maillog_test.go`, `models/email_request.go` |
-| Stripping X-Gophish-Signature | Replaced `X-Gophish-Signature` with `X-Signature` in `webhook/webhook.go` |
-| Changing server name | Changed the server name from `gophish` to `IGNORE` in `config/config.go` (this will change the value of the X-Mailer header) |
-| Changing rid value | Changed the recipient parameter from `rid` to `userid` in `models/campaign.go` |
-| Added a custom 404 page | Gophish original 404 can be used for detection as proven in [this article](https://insomniasec.com/blog/identifying-gophish-servers). Changes were to made to `controllers/phish.go` to load a custom 404 page at `templates/404.html` |
+| Feature | Description | Related Commits |
+|---------|-------------|-----------------| 
+| Stripping X-Gophish-Contact | Replaced `X-Gophish-Contact` with `X-Contact` in multiple files: `models/email_request_test.go`, `models/maillog.go`, `models/maillog_test.go`, `models/email_request.go` | [1e1b6fa](https://github.com/apero-ratio/reel-fishing/commit/1e1b6fa526cc6078ffcb72cda47774745e798c7d) | 
+| Stripping X-Gophish-Signature | Replaced `X-Gophish-Signature` with `X-Signature` in `webhook/webhook.go` | [383b5ac](https://github.com/apero-ratio/reel-fishing/commit/383b5ac32eaf0a5bed259d63e53a69536879a141) |
+| Changing server name | Changed the server name from `gophish` to `IGNORE` in `config/config.go` (this will change the value of the X-Mailer header) | [ac9efb6](https://github.com/apero-ratio/reel-fishing/commit/ac9efb6e5b540948c689f4965c1f3af15e355c1d) |
+| Changing rid value | Changed the recipient parameter from `rid` to `userid` in `models/campaign.go` | [b024ae1](https://github.com/apero-ratio/reel-fishing/commit/b024ae12aa0cc67d94c2889474c59261a379d7b4) |
+| Added a custom 404 page | Gophish original 404 can be used for detection as proven in [this article](https://insomniasec.com/blog/identifying-gophish-servers). Changes were to made to `controllers/phish.go` to load a custom 404 page at `templates/404.html` | [a6a9235](https://github.com/apero-ratio/reel-fishing/commit/a6a92358abdb1e21f52c73cb67c70615e073bb65) [1685e8d](https://github.com/apero-ratio/reel-fishing/commit/1685e8d7845aa9e16102262f201befa273eab886) |
 
 ### Install
 
