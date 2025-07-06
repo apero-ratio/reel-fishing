@@ -13,10 +13,10 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gophish/gomail"
 	"github.com/apero-ratio/reelfish/config"
 	log "github.com/apero-ratio/reelfish/logger"
 	"github.com/apero-ratio/reelfish/mailer"
+	"github.com/gophish/gomail"
 )
 
 // MaxSendAttempts set to 8 since we exponentially backoff after each failed send

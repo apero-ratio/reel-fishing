@@ -12,9 +12,9 @@ import (
 
 	"bitbucket.org/liamstask/goose/lib/goose"
 
-	mysql "github.com/go-sql-driver/mysql"
 	"github.com/apero-ratio/reelfish/auth"
 	"github.com/apero-ratio/reelfish/config"
+	mysql "github.com/go-sql-driver/mysql"
 
 	log "github.com/apero-ratio/reelfish/logger"
 	"github.com/jinzhu/gorm"

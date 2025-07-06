@@ -5,8 +5,8 @@ import (
 	"errors"
 	"fmt"
 
-	"github.com/gophish/gomail"
 	"github.com/apero-ratio/reelfish/config"
+	"github.com/gophish/gomail"
 	"github.com/jordan-wright/email"
 	check "gopkg.in/check.v1"
 )

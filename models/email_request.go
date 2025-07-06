@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"net/mail"
 
-	"github.com/gophish/gomail"
 	"github.com/apero-ratio/reelfish/config"
 	log "github.com/apero-ratio/reelfish/logger"
 	"github.com/apero-ratio/reelfish/mailer"
+	"github.com/gophish/gomail"
 )
 
 // PreviewPrefix is the standard prefix added to the rid parameter when sending

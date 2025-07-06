@@ -8,12 +8,12 @@ import (
 	"strconv"
 	"time"
 
-	"github.com/emersion/go-imap"
-	"github.com/emersion/go-imap/client"
-	"github.com/emersion/go-message/charset"
 	"github.com/apero-ratio/reelfish/dialer"
 	log "github.com/apero-ratio/reelfish/logger"
 	"github.com/apero-ratio/reelfish/models"
+	"github.com/emersion/go-imap"
+	"github.com/emersion/go-imap/client"
+	"github.com/emersion/go-message/charset"
 
 	"github.com/jordan-wright/email"
 )
