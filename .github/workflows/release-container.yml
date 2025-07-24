@@ -33,8 +33,16 @@ jobs:
       # Step 3
       - name: Docker build
         run: |
-          docker build -t ghcr.io/${{ env.CONTAINER_NAME }}:latest .
-          docker build -t ghcr.io/${{ env.CONTAINER_NAME }}:${{ env.VERSION }} .
+          docker build |
+           --label "org.opencontainers.image.source=https://github.com/apéro-ratio/reelfish"\
+           --label "org.opencontainers.image.description=A fork of Gophish that has been modified to remove noob-traps and alter recognizable features "|
+           --label "org.opencontainers.image.licenses=MIT"|
+            -t ghcr.io/${{ env.CONTAINER_NAME }}:latest .
+          docker build |
+           --label "org.opencontainers.image.source=https://github.com/apéro-ratio/reelfish"\
+           --label "org.opencontainers.image.description=A fork of Gophish that has been modified to remove noob-traps and alter recognizable features "|
+           --label "org.opencontainers.image.licenses=MIT"|
+            -t ghcr.io/${{ env.CONTAINER_NAME }}:${{ env.VERSION }} .
 
       # --- Push Stage ---
 
