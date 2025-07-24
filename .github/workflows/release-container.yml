@@ -5,53 +5,53 @@ on:
   release:
       types: [created]
 
-# Set environment variables available to all steps
 env:
-  GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }} # GitHub Container Registry token (set in repository secrets)
-  CONTAINER_NAME: apero-ratio/reelfish # Image name to publish (all lowercase)
-  USER_NAME: defaultmodel # GitHub username used for GHCR authentication
+  IMAGE_NAME: ${{ github.repository }}
 
 jobs:
   build-and-push:
-    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+      attestations: write
+      id-token: write
 
     steps:
-      # Step 1
       - name: Set up checkout
         uses: actions/checkout@v4
 
-      # Step 2
-      - name: Set up latest git tag
-        run: |
-          RAW_TAG="${GITHUB_REF#refs/tags/}"
-          VERSION="${RAW_TAG#*@}"
-          echo "VERSION=${VERSION}" >> $GITHUB_ENV
-          echo "Version: $VERSION"
+      - name: Log in to the Container registry
+        uses: docker/login-action@65b78e6e13532edd9afa3aa52ac7964289d1a9c1
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
-      # --- Build Stage ---
+      # Creates tags for us, example:
+      # Event | Ref                    | Docker tags
+      # ----------------------------------------------------
+      # push  | refs/heads/releases/v1 | releases-v1
+      # push  | tag 	refs/tags/v1.2.3 | 1.2.3, 1.2, latest
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@9ec57ed1fcdbf14dcef7dfbe97b2010124a938b7
+        with:
+          images: ghcr.io/${{ env.IMAGE_NAME }} # Name from it will create the tags
 
-      # Step 3
-      - name: Docker build
-        run: |
-          docker build |
-           --label "org.opencontainers.image.source=https://github.com/apéro-ratio/reelfish"|
-           --label "org.opencontainers.image.description=A fork of Gophish that has been modified to remove noob-traps and alter recognizable features "|
-           --label "org.opencontainers.image.licenses=MIT"|
-            -t ghcr.io/${{ env.CONTAINER_NAME }}:latest .
-          docker build |
-           --label "org.opencontainers.image.source=https://github.com/apéro-ratio/reelfish"|
-           --label "org.opencontainers.image.description=A fork of Gophish that has been modified to remove noob-traps and alter recognizable features "|
-           --label "org.opencontainers.image.licenses=MIT"|
-            -t ghcr.io/${{ env.CONTAINER_NAME }}:${{ env.VERSION }} .
+      - name: Build and push Docker image
+        id: push
+        uses: docker/build-push-action@f2a1d5e99d037542a71f64918e516c093c6f3fc4
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
 
-      # --- Push Stage ---
-
-      # Step 4
-      - name: GitHub (GHCR) login
-        run: echo $GHCR_TOKEN | docker login ghcr.io -u $USER_NAME --password-stdin
-
-      # Step 5
-      - name: GitHub (GHCR) push
-        run: |
-          docker push ghcr.io/${{ env.CONTAINER_NAME }}:latest
-          docker push ghcr.io/${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
+      - name: Generate artifact attestation
+        uses: actions/attest-build-provenance@v2
+        with:
+          subject-name: ghcr.io/${{ github.repository }}
+          subject-digest: ${{ steps.push.outputs.digest }}
+          push-to-registry: true
