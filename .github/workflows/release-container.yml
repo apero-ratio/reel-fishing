@@ -1,0 +1,49 @@
+# Taken from here: https://www.lucasjosino.com/blog/ci-cd-shipping-containers-to-ghcr-using-github-actions/
+name: 'Build and Push to GHCR'
+
+on:
+  release:
+      types: [created]
+
+# Set environment variables available to all steps
+env:
+  GHCR_TOKEN: ${{ secrets.GHCR_TOKEN }} # GitHub Container Registry token (set in repository secrets)
+  CONTAINER_NAME: apero-ratio/reelfish # Image name to publish (all lowercase)
+  USER_NAME: defaultmodel # GitHub username used for GHCR authentication
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest # Use the latest Ubuntu runner
+
+    steps:
+      # Step 1
+      - name: Set up checkout
+        uses: actions/checkout@v4
+
+      # Step 2
+      - name: Set up latest git tag
+        run: |
+          RAW_TAG="${GITHUB_REF#refs/tags/}"
+          VERSION="${RAW_TAG#*@}"
+          echo "VERSION=${VERSION}" >> $GITHUB_ENV
+          echo "Version: $VERSION"
+
+      # --- Build Stage ---
+
+      # Step 3
+      - name: Docker build
+        run: |
+          docker build -t ghcr.io/${{ env.CONTAINER_NAME }}:latest .
+          docker build -t ghcr.io/${{ env.CONTAINER_NAME }}:${{ env.VERSION }} .
+
+      # --- Push Stage ---
+
+      # Step 4
+      - name: GitHub (GHCR) login
+        run: echo $GHCR_TOKEN | docker login ghcr.io -u $USER_NAME --password-stdin
+
+      # Step 5
+      - name: GitHub (GHCR) push
+        run: |
+          docker push ghcr.io/${{ env.CONTAINER_NAME }}:latest
+          docker push ghcr.io/${{ env.CONTAINER_NAME }}:${{ env.VERSION }}
