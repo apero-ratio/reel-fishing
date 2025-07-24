@@ -20,21 +20,21 @@ RUN go get -v && go build -v
 # Runtime container
 FROM debian:stable-slim
 
-RUN useradd -m -d /opt/gophish -s /bin/bash app
+RUN useradd -m -d /opt/reelfish -s /bin/bash app
 
 RUN apt-get update && \
 	apt-get install --no-install-recommends -y jq libcap2-bin ca-certificates && \
 	apt-get clean && \
 	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-WORKDIR /opt/gophish
+WORKDIR /opt/reelfish
 COPY --from=build-golang /go/src/github.com/apero-ratio/reelfish/ ./
 COPY --from=build-js /build/static/js/dist/ ./static/js/dist/
 COPY --from=build-js /build/static/css/dist/ ./static/css/dist/
 COPY --from=build-golang /go/src/github.com/apero-ratio/reelfish/config.json ./
 RUN chown app. config.json
 
-RUN setcap 'cap_net_bind_service=+ep' /opt/gophish/gophish
+RUN setcap 'cap_net_bind_service=+ep' /opt/reelfish/reelfish
 
 USER app
 RUN sed -i 's/127.0.0.1/0.0.0.0/g' config.json
